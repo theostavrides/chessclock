@@ -1,0 +1,42 @@
+.Side {
+  width: 50%;
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.Side > div > p {
+  font-family: inherit;
+  font-weight: bold;
+  color: #222222;
+  font-size: 80px;
+  padding: 0;
+}
+
+.timeWrapperMilliseconds {
+  width: 45%;
+  height: 200px;
+}
+
+.timeWrapperNoMilliseconds {
+  width: 35%;
+  height: 140px;
+}
+
+
+.Turn {
+  background-color: darkgray;
+}
+
+.NotTurn {
+  background-color: lightgray;
+}
+
+.BorderLeft {
+  border-left: 2px solid #555555;
+}
+
+.BorderRight {
+  border-right: 2px solid #555555;
+}

@@ -1,0 +1,43 @@
+.Title {
+  font-size: 50px;
+  padding-bottom: 20px;
+}
+
+.Options {
+  height: 100%;
+  background-color: lightgray;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.Options > form {
+  height: 100px;
+  width: 140px;
+  display: flex;
+  justify-content: space-around;
+  flex-direction: column;
+}
+
+.Options > form > label {
+  display: flex;
+  justify-content: space-between;
+}
+
+.Options > form > label > input {
+  text-align: right;
+  box-sizing: border-box;
+  padding-right: 5px;
+  width: 25%;
+}
+
+.Options form label span {
+  width: 49%;
+}
+
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
