@@ -6,7 +6,6 @@ import './App.css';
 import './index.css';
 import chessTimeParser from './helpers/chessTimeParser';
 
-
 const INTERVAL_TIME = 100;
 
 class App extends Component {
@@ -14,10 +13,10 @@ class App extends Component {
     turn: undefined,
     initialTime: 5,
     increment: 0,
-    leftTime: 15000,
-    leftTimeString: chessTimeParser(15000),
-    rightTime: 15000,
-    rightTimeString: chessTimeParser(15000),
+    leftTime: 300000,
+    leftTimeString: chessTimeParser(300000),
+    rightTime: 300000,
+    rightTimeString: chessTimeParser(300000),
     clockVisible: false,
     interval: null,
   }
@@ -80,6 +79,7 @@ class App extends Component {
 
       if (prevState.increment) {
         nextState[side + "Time"] = prevState[side + "Time"] + prevState.increment * 1000;
+        nextState[side + "TimeString"] = chessTimeParser(prevState[side + "Time"] + prevState.increment * 1000);
         return nextState;
       } else {
         return nextState;
@@ -95,10 +95,7 @@ class App extends Component {
         this.setState(prevState => {
           const leftTime = prevState.leftTime - INTERVAL_TIME;
           let leftTimeString = chessTimeParser(leftTime);
-          return {
-            leftTime,
-            leftTimeString,
-          }
+          return { leftTime, leftTimeString }
         });
       }
     } else {
@@ -108,10 +105,7 @@ class App extends Component {
         this.setState(prevState => {
           const rightTime = prevState.rightTime - INTERVAL_TIME;
           let rightTimeString = chessTimeParser(rightTime);
-          return {
-            rightTime,
-            rightTimeString,
-          }
+          return { rightTime, rightTimeString }
         });
       }
     }
