@@ -21,8 +21,18 @@ class Clock extends Component {
   render(){
     return (
       <div className={classes.Clock}>
-        <Side sideClick={() => this.props.sideClick('left')} time={this.props.leftTime} name="left"/>
-        <Side sideClick={() => this.props.sideClick('right')} time={this.props.rightTime} name="right"/>
+        <Side
+          sideClick={() => this.props.sideClick('left')}
+          timeString={this.props.leftTimeString}
+          name="left"
+          isTurn={this.props.turn === 'left'}
+        />
+        <Side
+          sideClick={() => this.props.sideClick('right')}
+          timeString={this.props.rightTimeString}
+          name="right"
+          isTurn={this.props.turn === 'right'}
+        />
       </div>
     );
   }

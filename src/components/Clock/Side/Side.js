@@ -1,27 +1,22 @@
 import React, { Component } from 'react';
 import classes from './Side.module.css';
-import chessTimeParser from '../../../helpers/chessTimeParser';
 
 class Side extends Component {
+  shouldComponentUpdate(nextProps){
+    if (this.props.timeString !== nextProps.timeString || this.props.isTurn !== nextProps.isTurn) return true
+    return false
+  }
+
   render(){
-    const timeString = chessTimeParser(this.props.time);
-
-    let wrapperClass;
-    if (timeString.length < 6) {
-      wrapperClass = classes['timeWrapperNoMilliseconds']
-    } else {
-      wrapperClass = classes['timeWrapperMilliseconds']
-    }
-
     let sideClasses = [classes.Side];
-    this.props.turn ? sideClasses.push(classes.Turn) : sideClasses.push(classes.NotTurn);
-    this.props.name === 'left' ? sideClasses.push(classes.BorderRight) : sideClasses.push(classes.BorderLeft)
+    this.props.isTurn ? sideClasses.push(classes.Turn) : sideClasses.push(classes.NotTurn);
+    this.props.name === 'left' ? sideClasses.push(classes.Border1) : sideClasses.push(classes.Border2)
 
     return(
       <div onClick={this.props.sideClick} className={sideClasses.join(' ')}>
-        <div className={wrapperClass}>
+        <div>
           <p>
-            {timeString}
+            {this.props.timeString}
           </p>
         </div>
       </div>

@@ -12,20 +12,22 @@ class Options extends Component {
     return (
       <Fragment>
         <div className={classes.Options}>
-          <div className={classes.Title}>
-            Chess Clock
+          <div>
+            <div className={classes.Title}>
+              Chess Clock
+            </div>
+            <form onSubmit={this.submit}>
+              <label>
+                <span>Time:</span>
+                <input type="number" name="initialTime" value={this.props.initialTime} onChange={this.props.handleInputChange}></input>
+              </label>
+              <label>
+                <span>Increment:</span>
+                <input type="number" name="increment" value={this.props.increment} onChange={this.props.handleInputChange}></input>
+              </label>
+              <input type="submit" value="Start" />
+            </form>
           </div>
-          <form onSubmit={this.submit}>
-            <label>
-              <span>Time:</span>
-              <input type="number" name="initialTime" value={this.props.initialTime} onChange={this.props.handleInputChange}></input>
-            </label>
-            <label>
-              <span>Increment:</span>
-              <input type="number" name="increment" value={this.props.increment} onChange={this.props.handleInputChange}></input>
-            </label>
-            <input type="submit" value="Start" />
-          </form>
         </div>
       </Fragment>
     );

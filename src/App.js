@@ -4,6 +4,8 @@ import Clock from './components/Clock/Clock';
 import {BrowserRouter, Switch, Route, Redirect } from 'react-router-dom';
 import './App.css';
 import './index.css';
+import chessTimeParser from './helpers/chessTimeParser';
+
 
 const INTERVAL_TIME = 100;
 
@@ -12,8 +14,10 @@ class App extends Component {
     turn: undefined,
     initialTime: 5,
     increment: 0,
-    leftTime: 300000,
-    rightTime: 300000,
+    leftTime: 15000,
+    leftTimeString: chessTimeParser(15000),
+    rightTime: 15000,
+    rightTimeString: chessTimeParser(15000),
     clockVisible: false,
     interval: null,
   }
@@ -29,8 +33,10 @@ class App extends Component {
   handleSubmit = () => {
     this.setState((prevState, prevProps) => {
       return {
-        leftTime: prevState.initialTime * 60 * 1000,
-        rightTime: prevState.initialTime * 60 * 1000,
+        leftTime: prevState.initialTime * 60000,
+        leftTimeString: chessTimeParser(prevState.initialTime * 60000),
+        rightTime: prevState.initialTime * 60000,
+        rightTimeString: chessTimeParser(prevState.initialTime * 60000),
         clockVisible: true,
       };
     });
@@ -83,13 +89,31 @@ class App extends Component {
 
   decreaseTime = (side) => {
     if (side === 'left'){
-      this.state.leftTime <= 0 ?
+      if (this.state.leftTime <= 0) {
         clearInterval(this.state.Interval)
-        : this.setState(prevState => ({ leftTime: prevState.leftTime - INTERVAL_TIME }));
+      } else {
+        this.setState(prevState => {
+          const leftTime = prevState.leftTime - INTERVAL_TIME;
+          let leftTimeString = chessTimeParser(leftTime);
+          return {
+            leftTime,
+            leftTimeString,
+          }
+        });
+      }
     } else {
-      this.state.rightTime <= 0 ?
+      if (this.state.rightTime <= 0) {
         clearInterval(this.state.Interval)
-        : this.setState(prevState => ({ rightTime: prevState.rightTime - INTERVAL_TIME }));
+      } else {
+        this.setState(prevState => {
+          const rightTime = prevState.rightTime - INTERVAL_TIME;
+          let rightTimeString = chessTimeParser(rightTime);
+          return {
+            rightTime,
+            rightTimeString,
+          }
+        });
+      }
     }
   }
 
@@ -112,8 +136,8 @@ class App extends Component {
             <Route path='/clock'>
               <Clock
                 turn={this.state.turn}
-                leftTime={this.state.leftTime}
-                rightTime={this.state.rightTime}
+                leftTimeString={this.state.leftTimeString}
+                rightTimeString={this.state.rightTimeString}
                 sideClick={this.handleSideClick}
                 handleSpaceBarPressed={this.handleSpaceBarPressed}
                 resetState={this.resetState}
